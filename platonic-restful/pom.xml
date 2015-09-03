@@ -48,12 +48,27 @@
             <!-- use the following artifactId if you don't need servlet 2.x compatibility -->
             <!-- artifactId>jersey-container-servlet</artifactId -->
         </dependency>
-        <!-- uncomment this to get JSON support
+        
         <dependency>
             <groupId>org.glassfish.jersey.media</groupId>
             <artifactId>jersey-media-moxy</artifactId>
         </dependency>
-        -->
+<!-- <dependency> -->
+<!-- 	<groupId>com.owlike</groupId> -->
+<!-- 	<artifactId>genson</artifactId> -->
+<!-- 	<version>0.98</version> -->
+<!-- </dependency> -->
+<dependency>
+    <groupId>com.sun.jersey</groupId>
+    <artifactId>jersey-json</artifactId>
+    <version>1.8</version>
+</dependency>
+          <dependency>
+    <groupId>org.apache.jena</groupId>
+    <artifactId>apache-jena-libs</artifactId>
+    <type>pom</type>
+    <version>3.0.0</version>
+  </dependency>
     </dependencies>
     <properties>
         <jersey.version>2.21</jersey.version>
