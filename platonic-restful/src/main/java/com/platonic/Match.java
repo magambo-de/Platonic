@@ -1,13 +1,8 @@
 package com.platonic;
 
 import java.util.ArrayList;
-import java.util.List;
 
-import javax.ws.rs.Consumes;
-import javax.ws.rs.FormParam;
-import javax.ws.rs.POST;
-import javax.ws.rs.Path;
-import javax.ws.rs.Produces;
+import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 
 import com.hp.hpl.jena.query.Dataset;
@@ -20,20 +15,31 @@ import com.hp.hpl.jena.query.ResultSet;
 import com.hp.hpl.jena.tdb.TDBFactory;
 import com.platonic.beans.ProfileBean;
 
-@Path("profile")
-public class Profile {
-	
+@Path("match")
+public class Match {
+
 	@POST
 	@Consumes(MediaType.APPLICATION_FORM_URLENCODED)
 	@Produces(MediaType.APPLICATION_JSON)
-	public ProfileBean getProfile(@FormParam("id") int id)
+	public ProfileBean getMatch(@FormParam("id") int id)
 	{
-		String qString = "SELECT ?p ?o ?label" +
+		String qString = "SELECT ?person" +
 "WHERE" +
-"{" +
-	"<http://www.platonic.com#"+id+"> ?p ?o." +
-     "   OPTIONAL{?o <http://xmlns.com/foaf/0.1/name> ?label}." +
-	     "OPTIONAL{?o <http://www.w3.org/2004/02/skos/core#prefLabel> ?label}." +
+"{"+
+	"{<http://www.platonic.com#1234> <http://xmlns.com/foaf/0.1/interest> ?o."+
+        "?person <http://xmlns.com/foaf/0.1/interest> ?o.}" +
+        "UNION" +
+	"{<http://www.platonic.com#1234> <http://xmlns.com/foaf/0.1/interest> ?o. " +
+        "?person <http://xmlns.com/foaf/0.1/interest> ?o2." +
+        "?o <http://www.w3.org/2004/02/skos/core#narrower> ?o2} " +
+        "UNION " +
+	"{<http://www.platonic.com#1234> <http://xmlns.com/foaf/0.1/interest> ?o." +
+        "?person <http://xmlns.com/foaf/0.1/interest> ?o2." +
+        "?o <http://www.w3.org/2004/02/skos/core#broader> ?o2} " +
+        "UNION"+
+	"{<http://www.platonic.com#1234> <http://xmlns.com/foaf/0.1/interest> ?o."+
+        "?person <http://xmlns.com/foaf/0.1/interest> ?o2." +
+        "?o <http://www.w3.org/2004/02/skos/core#related> ?o2} " +
 "}";
 		
 
@@ -82,6 +88,4 @@ public class Profile {
 		ds.close();
 		return rs;
 	}
-	
-	
 }
