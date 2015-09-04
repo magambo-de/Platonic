@@ -1,23 +1,18 @@
 package com.platonic.beans;
 
+import java.util.ArrayList;
+
 import javax.xml.bind.annotation.XmlRootElement;
 
 @XmlRootElement
 public class ProfileBean {
 	private int id;
-	private String givenName;
-	private String familyName;
-	private String popularity;
+	private String name;
+	private ArrayList<String> interests;
+	private ArrayList<String> affiliation;
 	
 	public ProfileBean() {}
 	
-	public ProfileBean (int id, String givenName, String familyName, String popularity)
-	{
-		this.id = id;
-		this.givenName = givenName;
-		this.familyName = familyName;
-		this.popularity = popularity;
-	}
 
 	public int getId() {
 		return id;
@@ -27,29 +22,31 @@ public class ProfileBean {
 		this.id = id;
 	}
 
-	public String getGivenName() {
-		return givenName;
+	public String getName() {
+		return name;
 	}
 
-	public void setGivenName(String givenName) {
-		this.givenName = givenName;
+	public void setName(String name) {
+		this.name = name;
 	}
 
-	public String getFamilyName() {
-		return familyName;
+	public ArrayList<String> getInterests() {
+		return interests;
 	}
 
-	public void setFamilyName(String familyName) {
-		this.familyName = familyName;
+	public void setInterests(ArrayList<String> interests) {
+		this.interests = interests;
 	}
 
-	public String getPopularity() {
-		return popularity;
+	public ArrayList<String> getAffiliation() {
+		return affiliation;
 	}
 
-	public void setPopularity(String popularity) {
-		this.popularity = popularity;
+	public void setAffiliation(ArrayList<String> affiliation) {
+		this.affiliation = affiliation;
 	}
+
+
 	
 	
 }
